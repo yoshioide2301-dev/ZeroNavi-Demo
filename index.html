@@ -387,6 +387,7 @@
   }
 
   /* 問題ごとの直近3回の勝敗ドット（左=古い → 右=新しい） */
+  .question-id{ display:inline-block; margin:0 0 8px; padding:4px 9px; border:1px solid var(--accent); border-radius:8px; background:var(--accent-soft); color:var(--fg); font-size:calc(12px * var(--fs)); font-weight:700; }
   .qwrap{ position:relative; }
   .qwrap.has-dots .question-text{ padding-right:34px; }
   .q-dots{ position:absolute; top:12px; right:2px; display:flex; gap:4px; pointer-events:none; }
@@ -1051,7 +1052,7 @@
 
           <div class="quiz-body" id="quizBody">
             <div class="core-review-row" id="coreReviewRow" style="display:none"><button type="button" class="core-review-btn" onclick="openMaterialsFromCore()">📖 変更点5点の資料で復習</button></div>
-            <div class="qwrap" id="qWrap"><div class="q-dots" id="qDots" role="img" aria-label="過去の解答履歴"></div><div class="question-text" id="questionText"></div></div>
+            <div class="question-id" id="questionIdLabel"></div><div class="qwrap" id="qWrap"><div class="q-dots" id="qDots" role="img" aria-label="過去の解答履歴"></div><div class="question-text" id="questionText"></div></div>
             <div class="choice-list" id="choiceList"></div>
             <div id="explanationSlot"></div>
           </div>
@@ -1088,7 +1089,7 @@
             <button class="nav-arrow" id="cbtHdrNext" onclick="moveCbt(1)" aria-label="後回しにして次の問題へ">＞</button>
           </div>
           <div class="quiz-body cbt-body">
-            <div class="qwrap" id="cbtQWrap"><div class="q-dots" id="cbtQDots" role="img" aria-label="過去の解答履歴"></div><div class="question-text" id="cbtQuestionText"></div></div>
+            <div class="question-id" id="cbtQuestionIdLabel"></div><div class="qwrap" id="cbtQWrap"><div class="q-dots" id="cbtQDots" role="img" aria-label="過去の解答履歴"></div><div class="question-text" id="cbtQuestionText"></div></div>
             <div class="choice-list" id="cbtChoiceList"></div>
             <div class="cbt-nav">
               <button class="secondary-btn" id="cbtPrev" onclick="moveCbt(-1)">前の問題</button>
@@ -8713,6 +8714,7 @@ function renderCbtQuestion(){
   const q = cbt.questions[cbt.index];
   const total = cbt.questions.length;
   document.getElementById('cbtNum').textContent = `${cbt.index+1} / ${total}`;
+  document.getElementById('cbtQuestionIdLabel').textContent = `問題ID: ${q.id}`;
   document.getElementById('cbtQuestionText').textContent = q.question;
   renderDots('cbtQDots', 'cbtQWrap', q.id);
   const list = document.getElementById('cbtChoiceList');
@@ -9223,6 +9225,7 @@ function renderQuestion(){
   document.getElementById('quizNumLabel').textContent = `${state.currentIndex+1} / ${total}`;
   document.getElementById('quizCategoryLabel').textContent = q.category;
   document.getElementById('progressFill').style.width = `${(state.currentIndex/total)*100}%`;
+  document.getElementById('questionIdLabel').textContent = `問題ID: ${q.id}`;
   document.getElementById('questionText').textContent = q.question;
   renderDots('qDots', 'qWrap', q.id);
 
