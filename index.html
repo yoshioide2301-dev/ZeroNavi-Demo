@@ -472,6 +472,7 @@
     font-size:calc(12.5px * var(--fs)); line-height:1.6; color:rgba(var(--w),0.8);
     margin-bottom:10px;
   }
+  .edition-badge{ display:inline-block; margin:0 0 10px; padding:6px 10px; border-radius:8px; background:#2b73fa; color:#fff; font-size:calc(13px * var(--fs)); font-weight:800; }
   .explanation-ref{
     display:flex; align-items:center; gap:6px;
     font-size:calc(10.5px * var(--fs)); font-weight:600; color:var(--text-tertiary);
@@ -2556,15 +2557,15 @@ const QUESTIONS = [
     ],
     chapterID: 2,
     category: "第5版 改正点",
-    question: "技能証明の有効期間満了日が9月30日である場合、第5版の原則的な更新申請期間として正しいものを一つ選びなさい。",
+    question: "技能証明の更新申請期間として、原則正しいものはどれか。",
     choices: [
-      "3月30日から9月30日まで",
-      "3月31日から8月31日まで",
-      "6月30日から8月30日まで",
-      "9月1日から9月30日まで"
+      "有効期間満了日の6か月前から満了日まで",
+      "有効期間満了日の6か月前から1か月前まで",
+      "有効期間満了日の3か月前から1か月前まで",
+      "有効期間満了日の1か月前から満了日まで"
     ],
     correct: 1,
-    explanation: "満了日の6か月前から1か月前までが更新申請期間です。設問では9月30日が満了日なので、原則として3月31日から8月31日までとなります。",
+    explanation: "技能証明の有効期間が満了する日の6か月前から1か月前までに更新申請を行うのが原則です。更新開始日から満了日まで国外に滞在する場合には、期間前の申請に関する例外があります。",
     ref: "第2章 改正点（2026年7月14日適用）"
   },
   {
@@ -2918,7 +2919,7 @@ const QUESTIONS = [
     ],
     chapterID: 2,
     category: "第5版 改正点",
-    question: "教則第5版における農薬等の空中散布について、最も適切なものはどれか。",
+    question: "農薬等の空中散布について、承認手続きが不要となる場合として最も適切なものはどれか。",
     choices: [
       "農薬散布は物件投下に該当するため、どのような条件でも必ず承認申請が必要である。",
       "農薬散布であれば、目視内飛行か目視外飛行かにかかわらず、無条件で承認申請が不要となる。",
@@ -2926,7 +2927,7 @@ const QUESTIONS = [
       "農薬散布で承認申請が不要となるのは、必ず目視内飛行で実施する場合に限られる。"
     ],
     correct: 2,
-    explanation: "教則第5版では、農薬等の空中散布などについて、航空法施行規則第236条の82第1項第2号で定める要件を満たす場合、夜間飛行、目視外飛行、第三者から30m以内の飛行、危険物輸送及び物件投下に係る承認手続きが不要となる例外が追加された。したがって、「目視外なら必ず承認が必要」とする理解は誤りである。",
+    explanation: "農薬等の空中散布などで航空法施行規則第236条の82第1項第2号に定める要件を満たす場合、夜間・目視外・第三者から30m以内の飛行、危険物輸送及び物件投下に係る承認手続きが不要となる例外があります。無条件に不要になるわけではありません。",
     ref: "第2章 改正点（2026年7月14日適用）"
   },
   {
@@ -9292,6 +9293,7 @@ function selectChoice(idx){
         ${isCorrect ? ICONS.seal : ICONS.warnSeal}
         <span>${isCorrect ? '正解です' : '不正解です'}</span>
       </div>
+      ${q.id === "2-H020" || q.id === "2-H040" ? '<div class="edition-badge">教則第5版の改訂点</div>' : ""}
       <div class="explanation-body">${q.explanation}</div>
       <div class="explanation-ref">${ICONS.book}<span>参考：${EDITION} ${q.ref}（参照箇所は確認中）</span></div>
       <div class="explanation-ref">問題ID: ${q.id}</div>
